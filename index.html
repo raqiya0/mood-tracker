@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Tracker App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">😊</div>
+                    <h1>Mood Tracker</h1>
+                </div>
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="card">
+                    <h2>Welcome to Your Mood Journey</h2>
+                    <p>Track your daily moods and sleep patterns to better understand your emotional well-being.</p>
+                </div>
+            </section>
+
+            <!-- Mood Tracking Section -->
+            <section class="mood-section">
+                <div class="card">
+                    <h3>How are you feeling today?</h3>
+                    <div class="mood-options">
+                        <div class="mood-option" data-mood="very_happy">
+                            <div class="mood-icon">😊</div>
+                            <span>Very Happy</span>
+                        </div>
+                        <div class="mood-option" data-mood="happy">
+                            <div class="mood-icon">😀</div>
+                            <span>Happy</span>
+                        </div>
+                        <div class="mood-option" data-mood="neutral">
+                            <div class="mood-icon">🙂</div>
+                            <span>Neutral</span>
+                        </div>
+                        <div class="mood-option" data-mood="sad">
+                            <div class="mood-icon">🙁</div>
+                            <span>Sad</span>
+                        </div>
+                        <div class="mood-option" data-mood="very_sad">
+                            <div class="mood-icon">😞</div>
+                            <span>Very Sad</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="saveMood">Save Mood</button>
+                </div>
+            </section>
+
+            <!-- Daily Notes Section -->
+            <section class="notes-section">
+                <div class="card">
+                    <h3>Daily Notes & Reflections</h3>
+                    <div class="notes-input">
+                        <i class="fas fa-edit notes-icon"></i>
+                        <label for="dailyNotes">How was your day? Share your thoughts, experiences, or anything you'd like to remember...</label>
+                        <textarea id="dailyNotes" class="notes-textarea" placeholder="Write about your day, what made you happy, challenges you faced, or anything you want to reflect on..."></textarea>
+                        <div class="notes-counter">
+                            <span id="charCount">0</span>/500 characters
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="saveNotes">Save Notes</button>
+                </div>
+            </section>
+
+            <!-- Sleep Tracking Section -->
+            <section class="sleep-section">
+                <div class="card">
+                    <h3>Sleep Tracking</h3>
+                    <div class="sleep-input">
+                        <i class="fas fa-bed sleep-icon"></i>
+                        <label for="sleepHours">How many hours did you sleep last night?</label>
+                        <select id="sleepHours" class="sleep-select">
+                            <option value="">Select hours...</option>
+                            <option value="0-2">0-2 hours</option>
+                            <option value="3-4">3-4 hours</option>
+                            <option value="5-6">5-6 hours</option>
+                            <option value="7-8">7-8 hours</option>
+                            <option value="9+">9+ hours</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" id="saveSleep">Save Sleep Data</button>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="stats-section">
+                <div class="card">
+                    <h3>Your Mood Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h4>Weekly Mood</h4>
+                            <div class="mood-chart" id="moodChart">
+                                <!-- Chart will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Sleep Pattern</h4>
+                            <div class="sleep-chart" id="sleepChart">
+                                <!-- Chart will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Daily Quote Section -->
+            <section class="quote-section">
+                <div class="card">
+                    <div class="quote-content">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <blockquote id="dailyQuote">
+                            "Every day is a new beginning. Take a deep breath and start again."
+                        </blockquote>
+                        <cite>- Daily Inspiration</cite>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Mood Change Modal -->
+    <div id="moodChangeModal" class="modal">
+        <div class="modal-content mood-change-modal">
+            <div class="modal-header">
+                <h3>Change Your Mood</h3>
+                <button class="close-btn" onclick="closeMoodChangeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Select your new mood for today:</p>
+                <div class="mood-change-options">
+                    <div class="mood-change-option" data-mood="very_happy">
+                        <div class="mood-change-icon">😊</div>
+                        <span>Very Happy</span>
+                    </div>
+                    <div class="mood-change-option" data-mood="happy">
+                        <div class="mood-change-icon">😀</div>
+                        <span>Happy</span>
+                    </div>
+                    <div class="mood-change-option" data-mood="neutral">
+                        <div class="mood-change-icon">🙂</div>
+                        <span>Neutral</span>
+                    </div>
+                    <div class="mood-change-option" data-mood="sad">
+                        <div class="mood-change-icon">🙁</div>
+                        <span>Sad</span>
+                    </div>
+                    <div class="mood-change-option" data-mood="very_sad">
+                        <div class="mood-change-icon">😞</div>
+                        <span>Very Sad</span>
+                    </div>
+                </div>
+                <div class="mood-change-notes">
+                    <label for="moodChangeNotes">Add a note about why your mood changed (optional):</label>
+                    <textarea id="moodChangeNotes" placeholder="What happened that made your mood change?"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeMoodChangeModal()">Cancel</button>
+                <button class="btn btn-primary" id="confirmMoodChange">Update Mood</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Mood Tracker App. Track your emotions, improve your life.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
